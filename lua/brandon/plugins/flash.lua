@@ -1,0 +1,49 @@
+local M = {
+	"folke/flash.nvim",
+	-- event = "BufEnter",
+	---@type Flash.Config
+	opts = {
+		modes = {
+			char = {
+				jump_labels = true,
+				char_actions = function()
+					return { [";"] = "next", [","] = "prev" }
+				end,
+				search = { wrap = true },
+				highlight = {
+					backdrop = true,
+					groups = {
+						match = "FlashCharMatch",
+						label = "FlashCharLabel",
+					},
+				},
+			},
+		},
+	},
+	-- stylua: ignore
+	-- keys = {
+	-- 	{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+	-- 	{ "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+	-- 	{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+	-- 	{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+	-- 	{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+	-- },
+keys = {
+  { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+  { "S", mode = { "n", "x", "o" }, function() 
+      -- Check if buffer is not empty before jumping
+      if vim.api.nvim_buf_line_count(0) > 1 then
+        require("flash").treesitter() 
+      end
+    end, desc = "Flash Treesitter" },
+  { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+  { "R", mode = { "o", "x" }, function() 
+      if vim.api.nvim_buf_line_count(0) > 1 then
+        require("flash").treesitter_search() 
+      end
+    end, desc = "Treesitter Search" },
+  { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+},
+}
+
+return M

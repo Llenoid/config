@@ -1,0 +1,5 @@
+require("brandon.config.options")
+require("brandon.config.keymaps")
+require("brandon.config.autocmds")
+require("brandon.config.filetype")
+require("brandon.config.lazy")
