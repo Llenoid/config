@@ -123,4 +123,4 @@ local T = {
   end
 }
 
-return M
+return T

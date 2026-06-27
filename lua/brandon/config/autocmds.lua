@@ -157,11 +157,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+vim.api.nvim_set_hl(0, "CustomYank", { 
+  bg = "#ffc4a8", -- Soft pastel orange background
+  fg = "#1a1a1a", -- Dark gray text for crisp legibility
+  bold = true     
+})
+
 -- [[ Highlight on yank ]]
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
-    vim.highlight.on_yank({ higroup = "YankedText" })
+    vim.hl.on_yank({ higroup = "CustomYank" })
   end,
   group = highlight_group,
   pattern = "*",
