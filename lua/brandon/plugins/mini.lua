@@ -50,19 +50,23 @@ local M = {
 	event = "VeryLazy",
 	config = function()
 		local ai_opts = {
+			n_lines = 50,
 			custom_textobjects = {
-				F = require("mini.ai").gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+				F = require("mini.ai").gen_spec.treesitter({
+					a = "@function.outer",
+					i = "@function.inner",
+				}),
 				o = require("mini.ai").gen_spec.treesitter({
 					a = { "@conditional.outer", "@loop.outer" },
 					i = { "@conditional.inner", "@loop.inner" },
 				}),
 			},
-			{ n_lines = 50 },
 		}
 		require("mini.icons").setup(icons_opts)
 
 		vim.schedule(function ()
-			require("mini.ai").setup(ai_opts)
+			-- require("mini.ai").setup(ai_opts)
+			require("mini.ai").setup()
 			require("mini.align").setup(align_opts)
 			-- require("mini.indentscope").setup(indentscope_opts)
 			require("mini.surround").setup(surround_opts)
